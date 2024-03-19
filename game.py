@@ -10,6 +10,7 @@ from Main_Board import Main_Board
 NEW CODE
 """
 from PIL import Image
+import praw
 
 class Game: 
     """
@@ -94,10 +95,11 @@ class Game:
         """
         THIS IS WHERE YOU CAN EDIT THE SIDE SCREEN
         """
-        f = open("hermNose Medium.jpeg")
-        image = pygame.image.load(f)
-
-        self.screen.blit(image, (715, 450))
+        reddit = praw.Reddit(client_id="bSRpNHGelFDl-83OzRZ9tQ",
+                             client_secret="mIjH8k_ZJtEwV4oEuAQxuTV5VBQ2jg",
+                             user_agent="Andy by u/Own-Box-4601")
+        for submission in reddit.subreddit("temple").hot(limit=10):
+            print(submission.title)
 
     def update(self): 
         """
