@@ -5,3 +5,9 @@
 .idea/
 # Visual Studio Code
 .vscode/
+# Ignore Python bytecode files
+__pycache__/
+
+# Ignore specific bytecode files (*.pyc or *.pyo)
+*.pyc
+*.pyo
