@@ -37,6 +37,9 @@ class Game:
         self.screen = pygame.display.set_mode((1000, 700))
         self.player1 = player1
         self.player2 = player2
+        """
+        NEW CODE
+        """
         self.display_tu_news()
         
     def check_turn_timeout(self):
@@ -114,9 +117,6 @@ class Game:
         self.display_turn()
         self.display_piece_count()
         self.display_player_names(self.player1, self.player2)
-        """
-        NEW METHOD USAGE
-        """
         pygame.display.update()
         
     def winner(self): 
