@@ -6,6 +6,12 @@ import pygame
 from constants import RED, WHITE, YELLOW, SQUARE_SIZE
 from Main_Board import Main_Board
 
+"""
+NEW CODE
+"""
+from PIL import Image
+import praw
+
 class Game: 
     """
     The Game class is responsible for managing the game logic, and contains functions to initialize the game, check the turn timeout, display the turn,
@@ -82,6 +88,19 @@ class Game:
         self.screen.blit(text_surface, (715, 350))
         self.screen.blit(text_surface2, (715, 400))
 
+    """
+    NEW METHOD FOR TU NEWS UPDATES
+    """
+    def display_tu_news(self):
+        """
+        THIS IS WHERE YOU CAN EDIT THE SIDE SCREEN
+        """
+        reddit = praw.Reddit(client_id="bSRpNHGelFDl-83OzRZ9tQ",
+                             client_secret="mIjH8k_ZJtEwV4oEuAQxuTV5VBQ2jg",
+                             user_agent="Andy by u/Own-Box-4601")
+        for submission in reddit.subreddit("temple").hot(limit=10):
+            print(submission.title)
+
     def update(self): 
         """
         The update function updates the board to show the current board and features.
@@ -92,6 +111,10 @@ class Game:
         self.display_turn()
         self.display_piece_count()
         self.display_player_names(self.player1, self.player2)
+        """
+        NEW METHOD USAGE
+        """
+        self.display_tu_news()
         pygame.display.update()
         
     def winner(self): 
