@@ -7,7 +7,9 @@
 .vscode/
 # Ignore Python bytecode files
 __pycache__/
-
 # Ignore specific bytecode files (*.pyc or *.pyo)
 *.pyc
 *.pyo
+# Ignore user_data files including .json
+user_data/
+user_data.json
