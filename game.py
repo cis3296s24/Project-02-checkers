@@ -37,6 +37,7 @@ class Game:
         self.screen = pygame.display.set_mode((1000, 700))
         self.player1 = player1
         self.player2 = player2
+        self.display_tu_news()
         
     def check_turn_timeout(self):
         """
@@ -116,7 +117,6 @@ class Game:
         """
         NEW METHOD USAGE
         """
-        self.display_tu_news()
         pygame.display.update()
         
     def winner(self): 
