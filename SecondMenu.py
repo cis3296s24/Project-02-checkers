@@ -176,12 +176,20 @@ class SecondMenu:
                         score_manager.add_user(player2_name.username)
                         self.start_game_vs_player(start_game_screen)
                         score_manager.save_scores()
+                        """
+                        CHANGE ADDED
+                        """
+                        pygame.display.set_mode([Width, Height])
                         return
                     elif button_rect_2.collidepoint(event.pos):  # Start Game VS Computer button clicked
                         player1_name.get_player_name()
                         score_manager.add_user(player1_name.username)
                         self.start_game_vs_computer(start_game_screen)
                         score_manager.save_scores()
+                        """
+                        CHANGE ADDED
+                        """
+                        pygame.display.set_mode([Width, Height])
                         return
                 # score_manager.save_scores() # now inside elif so scores are updated before returning to main
                     elif event.type == self.background_music.SONG_END:
