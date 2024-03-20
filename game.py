@@ -98,8 +98,10 @@ class Game:
         reddit = praw.Reddit(client_id="bSRpNHGelFDl-83OzRZ9tQ",
                              client_secret="mIjH8k_ZJtEwV4oEuAQxuTV5VBQ2jg",
                              user_agent="Andy by u/Own-Box-4601")
-        for submission in reddit.subreddit("temple").hot(limit=10):
-            print(submission.title)
+        subreddit = reddit.subreddit('Temple')
+        newest_submission = subreddit.new(limit=1).__next__()
+        print("Title:", newest_submission.title)
+        print("URL:", newest_submission.url)
 
     def update(self): 
         """
