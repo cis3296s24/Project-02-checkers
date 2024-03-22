@@ -34,7 +34,7 @@ class Game:
         self.font = pygame.font.Font(None, 36)  # Font for rendering text
         self.text_color = WHITE  # Text color
         self.text_urgent_color = RED  # Text color when time is running out
-        self.screen = pygame.display.set_mode((1000, 700))
+        self.screen = pygame.display.set_mode((1000, 760))
         self.player1 = player1
         self.player2 = player2
         """
@@ -97,15 +97,21 @@ class Game:
     """
     def display_tu_news(self):
         """
-        THIS IS WHERE YOU CAN EDIT THE SIDE SCREEN
+        THIS IS WHERE WE SHOW THE RECENT REDDIT POST
         """
         reddit = praw.Reddit(client_id="bSRpNHGelFDl-83OzRZ9tQ",
                              client_secret="mIjH8k_ZJtEwV4oEuAQxuTV5VBQ2jg",
                              user_agent="Andy by u/Own-Box-4601")
         subreddit = reddit.subreddit('Temple')
         newest_submission = subreddit.new(limit=1).__next__()
-        print("Title:", newest_submission.title)
-        print("URL:", newest_submission.url)
+        title = f"Recent r/Temple post: {newest_submission.title}"
+        url = f"{newest_submission.url}"
+        self.font = pygame.font.Font(None, 23)
+        title_surface = self.font.render(title, True, self.text_color)
+        url_surface = self.font.render(url, True, self.text_color)
+        self.screen.blit(title_surface, (10, 690))
+        self.screen.blit(url_surface, (10, 705))
+        self.font = pygame.font.Font(None, 36)
 
     def update(self): 
         """
@@ -117,6 +123,7 @@ class Game:
         self.display_turn()
         self.display_piece_count()
         self.display_player_names(self.player1, self.player2)
+        self.display_tu_news()
         pygame.display.update()
         
     def winner(self): 
