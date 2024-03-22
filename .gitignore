@@ -11,5 +11,5 @@ __pycache__/
 *.pyc
 *.pyo
 # Ignore user_data files including .json
-user_data/
+/user_data/
 user_data.json
