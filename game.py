@@ -40,7 +40,7 @@ class Game:
         """
         NEW CODE
         """
-        self.display_tu_news()
+        self.title = self.pull_tu_news()
         
     def check_turn_timeout(self):
         """
@@ -95,22 +95,22 @@ class Game:
     """
     NEW METHOD FOR TU NEWS UPDATES
     """
+    def pull_tu_news(self):
+        reddit = praw.Reddit(client_id="bSRpNHGelFDl-83OzRZ9tQ",
+        client_secret="mIjH8k_ZJtEwV4oEuAQxuTV5VBQ2jg",
+        user_agent="Andy by u/Own-Box-4601")
+        subreddit = reddit.subreddit('Temple')
+        newest_submission = subreddit.new(limit=1).__next__()
+        title = f"Recent r/Temple post: {newest_submission.title}"
+        return title
+        
     def display_tu_news(self):
         """
         THIS IS WHERE WE SHOW THE RECENT REDDIT POST
         """
-        reddit = praw.Reddit(client_id="bSRpNHGelFDl-83OzRZ9tQ",
-                             client_secret="mIjH8k_ZJtEwV4oEuAQxuTV5VBQ2jg",
-                             user_agent="Andy by u/Own-Box-4601")
-        subreddit = reddit.subreddit('Temple')
-        newest_submission = subreddit.new(limit=1).__next__()
-        title = f"Recent r/Temple post: {newest_submission.title}"
-        url = f"{newest_submission.url}"
         self.font = pygame.font.Font(None, 23)
-        title_surface = self.font.render(title, True, self.text_color)
-        url_surface = self.font.render(url, True, self.text_color)
+        title_surface = self.font.render(self.title, True, self.text_color)
         self.screen.blit(title_surface, (10, 690))
-        self.screen.blit(url_surface, (10, 705))
         self.font = pygame.font.Font(None, 36)
 
     def update(self): 
