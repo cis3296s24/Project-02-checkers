@@ -123,6 +123,7 @@ class Game:
         self.display_turn()
         self.display_piece_count()
         self.display_player_names(self.player1, self.player2)
+        self.display_tu_news()
         pygame.display.update()
         
     def winner(self): 
