@@ -77,14 +77,18 @@ def main():
                 running = False
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 buttons = menu_buttons()
-                if buttons[0].collidepoint(event.pos): # If Start Game button is clicked, show the second menu
-                   second_menu_instance.start_game_menu()
-                if buttons[2].collidepoint(event.pos): # if mouse is clicked on tutorial button
-                    tutorial()
+                if buttons[0].collidepoint(event.pos): # If Start Game button is clicked
+                    second_menu_instance.start_game_menu()
                 elif buttons[1].collidepoint(event.pos): # if mouse is clicked on settings button
                     settings()
-                elif buttons[4].collidepoint(event.pos): # if mouse is clicked on leaderboard button (not yet implemented)
+                elif buttons[2].collidepoint(event.pos): # if mouse is clicked on tutorial button
+                    tutorial()
+                elif buttons[3].collidepoint(event.pos): # if mouse is clicked on leaderboard button
+                    show_leaderboard()
+                elif buttons[4].collidepoint(event.pos): # if mouse is clicked on board customization button
                     board_customization()
+                elif buttons[5].collidepoint(event.pos): # if Exit Game button is clicked
+                    running = False
                 # Check if the current song has finished, loop to next song
             elif event.type == SONG_END:
                 music_loop()
@@ -102,6 +106,7 @@ def main():
 
     # done! time to quit
     pygame.quit()
+
 
 def menu_buttons():
     """
@@ -271,7 +276,35 @@ def menu_buttons():
     screen.blit(board_icon_resized, board_icon_rect.topleft)  # Draw the icon after drawing the button
     screen.blit(button_text, button_text_rect)
 
-    return button_rect, button_rect_2, button_rect_3, button_rect_4, button_rect_5
+    #exit button setup
+    exit_icon = pygame.image.load('pics/exit_icon.png')
+    color = (128, 128, 128)  # grey
+    cursor_color = (100, 100, 100)  # darker grey
+    position = (Width // 2 - 150, Height // 3 + 360)  # Adjust the vertical position as needed
+    size = (300, 50)  # width, height
+    button_text = button_font.render("Exit Game", True, (255, 255, 255))  # Button text and color
+    button_text_rect = button_text.get_rect(center=(Width // 2, Height // 3 + 385))
+
+    pygame.draw.rect(screen, color, pygame.Rect(position, size))
+    screen.blit(button_text, button_text_rect)
+
+    exit_icon_resized = pygame.transform.scale(exit_icon, icon_size)
+    exit_icon_rect = exit_icon_resized.get_rect(topleft=(Width // 2 - 150 + 10, Height // 3 + 360 + (button_height - icon_size[1]) // 2))
+
+    pygame.draw.rect(screen, color, pygame.Rect(position, size))
+    screen.blit(exit_icon_resized, exit_icon_rect.topleft)
+    screen.blit(button_text, button_text_rect)
+
+    mouse = pygame.mouse.get_pos()
+    button_rect_6 = pygame.Rect(position, size)
+    if button_rect_6.collidepoint(mouse):
+        pygame.draw.rect(screen, cursor_color, button_rect_6)  # Change color when cursor hovered over
+    else:
+        pygame.draw.rect(screen, color, button_rect_6)  # Stay original color if cursor not hovering over
+
+    screen.blit(button_text, button_text_rect)  # This ensures the text is always visible
+
+    return button_rect, button_rect_2, button_rect_3, button_rect_4, button_rect_5, button_rect_6
 
 def tutorial(): 
     """
