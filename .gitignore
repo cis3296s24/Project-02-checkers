@@ -13,3 +13,4 @@ __pycache__/
 # Ignore user_data files including .json
 /user_data/
 user_data.json
+user_data/user_data.json
