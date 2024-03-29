@@ -9,7 +9,6 @@ from Main_Board import Main_Board
 """
 NEW CODE
 """
-from PIL import Image
 import praw
 
 class Game: 
